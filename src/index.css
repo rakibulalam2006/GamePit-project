@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@plugin "daisyui" {
+    themes:light --default;
+}
+.button{
+  @apply btn font-semibold bg-purple-500 p-2
+}
