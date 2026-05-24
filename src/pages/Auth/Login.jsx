@@ -6,9 +6,11 @@ import { toast } from "react-toastify";
 const Login = () => {
   const navigate = useNavigate();
 
-  const { 
+  const {
     signinWithEmailPasswordFunc,
     setUser,
+    signinWithGoogleFunc,
+    signinWithGithubFunc,
   } = useContext(AuthContext);
 
   const handleLogin = (e) => {
@@ -29,9 +31,35 @@ const Login = () => {
       toast.error(err.message);
       console.log(err);
     })
-   
-  
   };
+//  google signin function
+  const handleGoogleSignin = () => {
+    signinWithGoogleFunc()
+      .then((res) => {
+        setUser(res.user);
+        toast.success("Google login successful");
+        navigate("/");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+        console.log(err);
+      });
+  };
+
+  // github signin function
+  const handleGithubSignIn = () => {
+    signinWithGithubFunc()
+      .then((res) => {
+        setUser(res.user);
+        toast.success("Github login successful");
+        navigate("/");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+        console.log(err);
+      });
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <div className="relative bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-2xl w-[350px] border border-white/20">
@@ -84,8 +112,53 @@ const Login = () => {
           <div className="text-center text-white text-sm">or</div>
 
           {/* Social Login */}
-          <button className="w-full py-2 rounded-lg bg-white text-gray-700 font-semibold hover:bg-gray-200 transition">
-            Continue with Google
+          <button
+            onClick={handleGoogleSignin}
+            type="button"
+            className="flex items-center justify-center gap-3 bg-white text-gray-800 px-5 py-2 rounded-lg w-full font-semibold hover:bg-gray-100 transition-colors cursor-pointer"
+          >
+            <svg
+              aria-label="Google logo"
+              width="16"
+              height="16"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <g>
+                <path d="m0 0H512V512H0" fill="#fff"></path>
+                <path
+                  fill="#34a853"
+                  d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
+                ></path>
+                <path
+                  fill="#4285f4"
+                  d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
+                ></path>
+                <path
+                  fill="#fbbc02"
+                  d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
+                ></path>
+                <path
+                  fill="#ea4335"
+                  d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
+                ></path>
+              </g>
+            </svg>
+            Login with Google
+          </button>
+
+          {/* Github Signin */}
+          <button
+            onClick={handleGithubSignIn}
+            type="button"
+            className="flex items-center justify-center gap-3 bg-white text-gray-800 px-5 py-2 rounded-lg w-full font-semibold hover:bg-gray-100 transition-colors cursor-pointer"
+          >
+            <img
+              src="https://img.icons8.com/fluency/48/github.png"
+              alt="google"
+              className="w-5 h-5"
+            />
+            Continue with Github
           </button>
 
           {/* Signup */}
