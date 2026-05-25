@@ -8,6 +8,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 import { auth } from "../Firebase/firebase.config";
 
@@ -16,32 +17,45 @@ const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   //  signup
   const createUser = (email, password) => {
+     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // signin
   const signinWithEmailPasswordFunc = (email, password) => {
-    return signInWithEmailAndPassword(auth
-      , email, password);
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password)
+    .finally(() => setLoading(false));
   };
 
   //google signin
   const signinWithGoogleFunc = () => {
-    return signInWithPopup(auth, googleProvider);
+     setLoading(true);
+    return signInWithPopup(auth, googleProvider)
+    .finally(() => setLoading(false));
   };
 
   // github signin
   const signinWithGithubFunc = () => {
-    return signInWithPopup(auth, githubProvider);
+     setLoading(true);
+    return signInWithPopup(auth, githubProvider)
+    .finally(() => setLoading(false));
   };
 
+  const signOutFunc = () => {
+    setLoading(true);
+    return signOut(auth)
+    .finally(() => setLoading(false));
+  };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
       setUser(currentUser);
+      setLoading(false);
     });
 
     return () => unsubscribe();
@@ -54,6 +68,9 @@ const AuthProvider = ({ children }) => {
     signinWithEmailPasswordFunc,
     signinWithGoogleFunc,
     signinWithGithubFunc,
+    loading,
+    setLoading,
+    signOutFunc
   };
 
   return (

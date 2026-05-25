@@ -20,7 +20,7 @@ const Register = () => {
     });
     createUser(email, password)
     .then((res)=>{
-      console.log(res);
+        console.log(res.user);
       
       toast.success("Signup successful. please verify your email before login");
     })
