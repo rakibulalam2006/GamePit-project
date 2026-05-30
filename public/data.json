@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Player Unknowns Battle Ground: PUBG",
-    "coverPhoto": "https://i.ibb.co.com/yBnf0H8b/z-CSGn-Bt-Zk0-Lmp1-BAbya-Zf-Lkt-Dz-Hm-C6oke67qzz3-G1l-Beg-AF2asyt5-Kz-XOJ2-PVd-HDYk-U-s48-rw.webp",
+    "coverPhoto": "https://i.ibb.co.com/9DtVwY5/images-q-tbn-ANd9-Gc-QDqj-PNxq-Uc-YJSh-Rtj-Q3km-Nt-Fhu4-OI10-Kpg-s.jpg",
     "category": "FPS",
     "downloadLink": "https://www.pubgmobile.com/en-US/home.shtml",
     "description": "PUBG Mobile is a fast-paced battle royale game where players fight for survival, strategy, and victory on dynamic maps.",
@@ -28,7 +28,7 @@
   {
     "id": 3,
     "title": "Genshin Impact",
-    "coverPhoto": "https://i.ibb.co.com/5hvJ6RjQ/YQqy-Ka-XX-63krqsf-Iz-UEJWUWLINxcb5tb-S6-QVy-Sdxb-S7e-ZV7-YB2d-Uj-Uv-X27x-A0-TIGtfx-Q5v-t-Qjwl-T5t-TB-O.webp",
+    "coverPhoto": "https://i.ibb.co.com/1GhgdDTv/images-q-tbn-ANd9-Gc-RA-Gp4ry-Ccy1-T-Swi-Rue-JR0g-Mr9v8-Uq-OIj-LHV8s-WBzd-Ou7-f-Ai-Py-Yg-UOBadu-Nzw-WGa.jpg",
     "category": "RPG",
     "downloadLink": "https://genshin.hoyoverse.com",
     "description": "Explore a vast open world, control multiple characters, and unleash elemental combos in this action RPG.",
@@ -41,7 +41,7 @@
   {
     "id": 4,
     "title": "Among Us",
-    "coverPhoto": "https://example.com/images/amongus.png",
+    "coverPhoto": "https://i.ibb.co.com/398n9Btx/images-q-tbn-ANd9-Gc-Qleu-J6-Cn-ZUAa-DZXQwfas-ZEDVx-Us-MVA6-RYA-s.png",
     "category": "Party",
     "downloadLink": "https://www.innersloth.com/games/among-us",
     "description": "Work together to complete tasks, but watch out for impostors trying to sabotage and eliminate everyone.",
@@ -54,7 +54,7 @@
   {
     "id": 5,
     "title": "Clash of Clans",
-    "coverPhoto": "https://example.com/images/clashofclans.png",
+    "coverPhoto": "https://i.ibb.co.com/Pz5SSPPc/s-Fm-Wf-Yb-Yp-2ea7-VRMTnwd3gj-IBr-PGXHj-d-ab1-k1q1p2-OMk4ri-GMF1vqxdh-ONOt-TYOt-BVpk7a4-AYc-KU68-LNGQ.png",
     "category": "Strategy",
     "downloadLink": "https://clashofclans.com",
     "description": "Build your village, train your troops, and battle against millions of players worldwide.",
@@ -67,7 +67,7 @@
   {
     "id": 6,
     "title": "Asphalt 9: Legends",
-    "coverPhoto": "https://example.com/images/asphalt9.png",
+    "coverPhoto": "https://i.ibb.co.com/nsqhRc1k/images-q-tbn-ANd9-Gc-RAQ1c-Ga5opdq-Rhcb-Hs-Xg-ri13-SMu-Vu-Mq9-JSu-UYIBh-Ezz-TEQE3-TKMWD-j-SLH8-DHSoo-U7.jpg",
     "category": "Racing",
     "downloadLink": "https://www.gameloft.com/game/asphalt-9-legends",
     "description": "Feel the thrill of high-speed arcade racing with stunning graphics and a huge roster of real cars.",
@@ -80,7 +80,7 @@
   {
     "id": 7,
     "title": "Free Fire",
-    "coverPhoto": "https://example.com/images/freefire.png",
+    "coverPhoto": "https://i.ibb.co.com/Pz1G9r50/MV5-BMTI3-MTE3-ZGQt-NWJm-Mi00-MTAz-LWI2-Mz-Yt-ZTFi-MDRk-Mz-U0-Zj-E0-Xk-Ey-Xk-Fqc-Gc-V1.jpg",
     "category": "FPS",
     "downloadLink": "https://ff.garena.com",
     "description": "Fast-paced battle royale where 50 players fight to be the last one standing in 10-minute matches.",
@@ -93,7 +93,7 @@
   {
     "id": 8,
     "title": "Minecraft",
-    "coverPhoto": "https://example.com/images/minecraft.png",
+    "coverPhoto": "https://i.ibb.co.com/FktQZsmK/apps-17382-13510798885735219-9735d495-578c-4a4c-b892-3eb3a780b3a0.jpg",
     "category": "Sandbox",
     "downloadLink": "https://www.minecraft.net",
     "description": "Build, explore, and survive in an endless blocky world full of creativity and adventure.",

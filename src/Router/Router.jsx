@@ -6,6 +6,8 @@ import GameDetails from "../pages/Home/GameDetails";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 
+import Profile from "../pages/Home/Profile";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,7 +21,8 @@ const router = createBrowserRouter([
       {
         path:"/allGames",
         element:<AllGames></AllGames>,
-        loader:() =>fetch("data.json"),
+        loader:() =>  fetch("/data.json")
+        
       },
       {
         path:"/game/:id",
@@ -35,6 +38,10 @@ const router = createBrowserRouter([
         path:"/register",
         element:<Register></Register>
       },
+      {
+        path:"/profile",
+        element:<Profile></Profile>
+      }
     ],
   },
   

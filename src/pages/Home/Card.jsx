@@ -3,7 +3,6 @@ import { NavLink } from "react-router";
 
 const Card = ({item}) => {
 
-  
     return (
       <div>
         <div

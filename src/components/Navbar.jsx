@@ -23,22 +23,22 @@ const Navbar = () => {
   };
   // console.log(loading)
   return (
-    <div className="bg-slate-100f py-2 border-b border-b-slate-300 ">
+    <div className="bg-slate-100f py-1 border-b border-b-slate-300 ">
       <div className="flex items-center justify-between">
         <figure>
           <img src="" className="w-14" />
         </figure>
-        <ul className="flex items-center gap-2">
+        <ul className="flex items-center gap-4">
           <li>
             <MyLink to={"/"}>Home</MyLink>
           </li>
           <li>
-            <MyLink to={"/about-us"}>About us</MyLink>
+            <MyLink to={"/allGames"}>App</MyLink>
           </li>
           {user ? (
-            <li>
-              <MyLink to={"/profile"}>Profile</MyLink>
-            </li>
+              <li>
+                <MyLink to={"/profile"}>Profile</MyLink>
+              </li>
           ) : (
             ""
           )}
@@ -72,7 +72,7 @@ const Navbar = () => {
               <h2 className="text-xl font-semibold mt-2">
                 {user?.displayName}
               </h2>
-              <p className="text-white/80 mt-2">{user?.email}</p>
+              <p className=" mt-2">{user?.email}</p>
               <button onClick={handleSignOut} className="my-btn mt-2">
                 Sign Out
               </button>

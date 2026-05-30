@@ -1,10 +1,27 @@
 import { useLoaderData, useParams } from "react-router";
+import { toast } from "react-toastify";
 
 const GameDetails = () => {
     const data = useLoaderData();
     const {id} = useParams();
-    console.log(id)
-    const game = data.find((item)=>item.id == id);
+    // console.log(data)
+    const game = data.find((item)=>item.id === Number(id));
+    if (!game) {
+      return <h1>Game not found</h1>;
+    }
+    
+    const handleInstall = () =>{
+      
+      const installedGames = JSON.parse(localStorage.getItem("installedGames")) || [];
+      
+      if(!installedGames.some((g)=>g.id === game.id)){
+        installedGames.push(game);
+        localStorage.setItem("installedGames", JSON.stringify(installedGames));
+        toast.success("Game installed successfully!");
+      }else{
+        toast.error("Game is already installed.");
+      }
+    }
     return (
       <div className="min-h-screen bg-gray-900 text-white p-6">
         <div className="max-w-2xl mx-auto bg-gray-800 p-6 rounded-xl">
@@ -56,7 +73,7 @@ const GameDetails = () => {
             <span>Size: {game.appSize}</span>
           </div>
 
-          <button className="bg-green-600 px-5 py-2 rounded">
+          <button onClick={handleInstall}  className="bg-green-600 px-5 py-2 rounded">
             Download Now
           </button>
         </div>
