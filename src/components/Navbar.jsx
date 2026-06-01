@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { toast } from "react-toastify";
 import { ClockLoader } from "react-spinners";
 import { AuthContext } from "../Context/AuthContext";
+import { FaGamepad } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, setUser, signOutFunc, loading } = useContext(AuthContext);
@@ -25,9 +26,12 @@ const Navbar = () => {
   return (
     <div className="bg-slate-100f py-1 border-b border-b-slate-300 ">
       <div className="flex items-center justify-between">
-        <figure>
-          <img src="" className="w-14" />
-        </figure>
+         <div className="flex items-center gap-2">
+                    <FaGamepad className="text-3xl text-primary" />
+                    <NavLink to="/" className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+                      GamePit
+                    </NavLink>
+                  </div>
         <ul className="flex items-center gap-4">
           <li>
             <MyLink to={"/"}>Home</MyLink>

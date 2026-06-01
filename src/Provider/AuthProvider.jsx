@@ -9,6 +9,8 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "../Firebase/firebase.config";
 
@@ -25,32 +27,49 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  // signin
+  // update profile
+  const updateProfileFunc = (displayName, photoURL) =>{
+    setLoading(true);
+    return updateProfile(auth.currentUser, {
+      displayName,
+      photoURL,
+    })
+    
+  }
+
+  // email verification
+  const sendEmailVerificationFunc = () =>{
+    setLoading(true);
+    return sendEmailVerification(auth.currentUser);
+  }
+
+  // signin/login 
   const signinWithEmailPasswordFunc = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password)
-    .finally(() => setLoading(false));
   };
 
   //google signin
   const signinWithGoogleFunc = () => {
      setLoading(true);
     return signInWithPopup(auth, googleProvider)
-    .finally(() => setLoading(false));
+    
   };
 
   // github signin
   const signinWithGithubFunc = () => {
      setLoading(true);
     return signInWithPopup(auth, githubProvider)
-    .finally(() => setLoading(false));
+   
   };
-
+  
+  // logout
   const signOutFunc = () => {
     setLoading(true);
     return signOut(auth)
-    .finally(() => setLoading(false));
+  
   };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
@@ -70,7 +89,9 @@ const AuthProvider = ({ children }) => {
     signinWithGithubFunc,
     loading,
     setLoading,
-    signOutFunc
+    signOutFunc,
+    updateProfileFunc,
+    sendEmailVerificationFunc,
   };
 
   return (

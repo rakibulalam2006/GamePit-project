@@ -106,7 +106,7 @@
   {
     "id": 9,
     "title": "Pokémon GO",
-    "coverPhoto": "https://example.com/images/pokemongo.png",
+    "coverPhoto": "https://i.ibb.co.com/NdXx34K0/images-q-tbn-ANd9-Gc-SKpg-OUKohs-Cp-R76a0u492zlm-KCuqao22ub-Degy-J7y-Ms-Ziq2-Wty-yo1b46-Of-NCHTm-Ygk-Cf.jpg",
     "category": "AR",
     "downloadLink": "https://pokemongo.nianticlabs.com",
     "description": "Catch Pokémon in the real world, battle at Gyms, and team up in raids with friends.",
@@ -119,7 +119,7 @@
   {
     "id": 10,
     "title": "Candy Crush Saga",
-    "coverPhoto": "https://example.com/images/candycrush.png",
+    "coverPhoto": "https://i.ibb.co.com/b5crcfVr/apps-7458-13510798882606697-b6a31126-a832-4c65-8788-783028e60938.jpg",
     "category": "Puzzle",
     "downloadLink": "https://www.king.com/game/candycrushsaga",
     "description": "Match three candies to solve puzzles, with hundreds of levels and sweet power-ups.",
@@ -132,7 +132,7 @@
   {
     "id": 11,
     "title": "League of Legends: Wild Rift",
-    "coverPhoto": "https://example.com/images/wildrift.png",
+    "coverPhoto": "https://i.ibb.co.com/CKZH28B5/images-q-tbn-ANd9-Gc-TLU8h43nq-NIXef-YZs9-Czdne-Uqm-U8bbpd-Eyc-Q-s.jpg",
     "category": "MOBA",
     "downloadLink": "https://wildrift.leagueoflegends.com",
     "description": "The authentic LoL MOBA experience on mobile with refined controls and fast-paced 5v5 battles.",
@@ -145,7 +145,7 @@
   {
     "id": 12,
     "title": "Roblox",
-    "coverPhoto": "https://example.com/images/roblox.png",
+    "coverPhoto": "https://i.ibb.co.com/ks83KK4D/App-icon-roblox.webp",
     "category": "Sandbox",
     "downloadLink": "https://www.roblox.com",
     "description": "Create, share, and play millions of immersive games across every genre with friends.",

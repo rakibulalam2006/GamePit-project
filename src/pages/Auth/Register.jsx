@@ -1,11 +1,18 @@
 import { useContext } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 import { toast } from "react-toastify";
 
 const Register = () => {
-
-  const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const {
+     createUser,
+     updateProfileFunc,
+     sendEmailVerificationFunc,
+     signOutFunc,
+     setUser,
+      setLoading,
+    } = useContext(AuthContext);
 
 
   const handleSignup = (e) =>{
@@ -13,18 +20,59 @@ const Register = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
+    const displayName = form.name.value;
+    const photoURL = form.photoUrl.value;
+    const confirmPassword = form.confirmPassword.value;
     console.log("signup function entered", {
       email,
       password,
      
     });
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
     createUser(email, password)
     .then((res)=>{
         console.log(res.user);
-      
-      toast.success("Signup successful. please verify your email before login");
-    })
+            //update profile
+            updateProfileFunc(displayName, photoURL)
+                      .then((res) => {
+                        console.log(res);
+                        sendEmailVerificationFunc()
+                          .then((res) => {
+                            console.log(res);
+                            setLoading(false)
+                            //signout user
+                            signOutFunc()
+                            .then(() => {
+                              toast.success(
+                                "Signup successful.Check our email to active your account",
+                              );
+                               setUser(null);
+                               form.reset();
+                               navigate("/signin")
+                             });
+                          })
+                          .catch((e) => {
+                            //  console.log(e);
+                            setLoading(false);
+                            toast.error(e.message);
+                          });
+                        // console.log(res);
+                       
+                      })
+                      .catch((e) => {
+                        // console.log(e)
+                        setLoading(false);
+                        toast.error(e.message);
+                      });
+                    
+                    
+                  })
     .catch((err)=>{
+      setLoading(false);
        if (err.code == "auth/email-already-in-use") {
                 toast.error("User Already EXist in this site");
               } else if (err.code === "auth/invalid-email") {
@@ -44,91 +92,86 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-        <div className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-white/20">
+      <div className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-white/20">
+        <h2 className="text-3xl font-bold text-white text-center mb-6">
+          Create Account
+        </h2>
 
-          <h2 className="text-3xl font-bold text-white text-center mb-6">
-            Create Account
-          </h2>
+        <form onSubmit={handleSignup} className="space-y-4">
+          {/* Name */}
+          <div>
+            <label className="text-white text-sm">Name</label>
+            <input
+              name="name"
+              type="text"
+              placeholder="Enter your name"
+              className="w-full mt-1 px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-200 outline-none focus:ring-2 focus:ring-pink-400"
+              required
+            />
+          </div>
+          {/* photoUrl */}
+          <div>
+            <label className="text-white text-sm">Photo</label>
+            <input
+              name="photoUrl"
+              type="text"
+              placeholder="Enter your Photo"
+              className="w-full mt-1 px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-200 outline-none focus:ring-2 focus:ring-pink-400"
+              required
+            />
+          </div>
 
-          <form onSubmit={handleSignup} className="space-y-4">
+          {/* Email */}
+          <div>
+            <label className="text-white text-sm">Email</label>
+            <input
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              className="w-full mt-1 px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-200 outline-none focus:ring-2 focus:ring-purple-400"
+              required
+            />
+          </div>
 
-            {/* Name */}
-            <div>
-              <label className="text-white text-sm">Name</label>
-              <input
-                name="name"
-                type="text"
-                placeholder="Enter your name"
-                className="w-full mt-1 px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-200 outline-none focus:ring-2 focus:ring-pink-400"
-                required
-              />
-            </div>
-            {/* photoUrl */}
-            <div>
-              <label className="text-white text-sm">Photo</label>
-              <input
-                name="photoUrl"
-                type="text"
-                placeholder="Enter your Photo"
-                className="w-full mt-1 px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-200 outline-none focus:ring-2 focus:ring-pink-400"
-                required
-              />
-            </div>
+          {/* Password */}
+          <div>
+            <label className="text-white text-sm">Password</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Enter password"
+              className="w-full mt-1 px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-200 outline-none focus:ring-2 focus:ring-indigo-400"
+              required
+            />
+          </div>
 
-            {/* Email */}
-            <div>
-              <label className="text-white text-sm">Email</label>
-              <input
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                className="w-full mt-1 px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-200 outline-none focus:ring-2 focus:ring-purple-400"
-                required
-              />
-            </div>
+          {/* Confirm Password */}
+          <div>
+            <label className="text-white text-sm">Confirm Password</label>
+            <input
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirm password"
+              className="w-full mt-1 px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-200 outline-none focus:ring-2 focus:ring-pink-400"
+              required
+            />
+          </div>
 
-            {/* Password */}
-            <div>
-              <label className="text-white text-sm">Password</label>
-              <input
-                name = "password"
-                type="password"
-                placeholder="Enter password"
-                className="w-full mt-1 px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-200 outline-none focus:ring-2 focus:ring-indigo-400"
-                required
-              />
-              
-            </div>
+          {/* Button */}
+          <button className="w-full py-2 rounded-lg bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold hover:scale-105 transition">
+            Register
+          </button>
 
-            {/* Confirm Password */}
-            <div>
-              <label className="text-white text-sm">Confirm Password</label>
-              <input
-                type="password"
-                placeholder="Confirm password"
-                className="w-full mt-1 px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-200 outline-none focus:ring-2 focus:ring-pink-400"
-                required
-              />
-            </div>
-
-            {/* Button */}
-            <button className="w-full py-2 rounded-lg bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold hover:scale-105 transition">
-              Register
-            </button>
-
-            {/* Login link */}
-            <p className="text-center text-sm text-white mt-4">
-              Already have an account?{" "}
-              <Link to={"/login"} className="font-semibold underline">
-                Login
-              </Link>
-            </p>
-
-          </form>
-
-        </div>
+          {/* Login link */}
+          <p className="text-center text-sm text-white mt-4">
+            Already have an account?{" "}
+            <Link to={"/login"} className="font-semibold underline">
+              Login
+            </Link>
+          </p>
+        </form>
       </div>
-  
+    </div>
   );
 };
 
