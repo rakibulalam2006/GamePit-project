@@ -52,7 +52,7 @@ const Register = () => {
                               );
                                setUser(null);
                                form.reset();
-                               navigate("/signin")
+                               navigate("/login")
                              });
                           })
                           .catch((e) => {

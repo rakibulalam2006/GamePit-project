@@ -11,6 +11,7 @@ import {
   signOut,
   updateProfile,
   sendEmailVerification,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../Firebase/firebase.config";
 
@@ -62,6 +63,12 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, githubProvider)
    
   };
+
+  // reset password
+  const sendPassResetEmailFunc = (email) =>{
+    setLoading(true);
+    return sendPasswordResetEmail(auth, email);
+  }
   
   // logout
   const signOutFunc = () => {
@@ -69,6 +76,7 @@ const AuthProvider = ({ children }) => {
     return signOut(auth)
   
   };
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -92,6 +100,7 @@ const AuthProvider = ({ children }) => {
     signOutFunc,
     updateProfileFunc,
     sendEmailVerificationFunc,
+    sendPassResetEmailFunc,
   };
 
   return (

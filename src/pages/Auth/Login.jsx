@@ -1,48 +1,65 @@
-import { useContext } from "react";
+import { useContext, useRef,} from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 import { toast } from "react-toastify";
 
+
 const Login = () => {
   const navigate = useNavigate();
+  const emailRef = useRef(null);
 
   const {
     signinWithEmailPasswordFunc,
     setUser,
     signinWithGoogleFunc,
     signinWithGithubFunc,
+    setLoading,
+    signOutFunc,
+    sendPassResetEmailFunc,
   } = useContext(AuthContext);
+
+  
 
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log("login function entered", {
-      email,
-      password,
-    });
+    // console.log("login function entered", {
+    //   email,
+    //   password,
+    // });
     signinWithEmailPasswordFunc(email, password)
-    .then((res) =>{
-       setUser(res.user);
-       toast.success("Login successful");
-       navigate("/");
-    })
-    .catch((err) =>{
-      toast.error(err.message);
-      console.log(err);
-    })
+      .then((res) => {
+        if (!res.user.emailVerified) {
+          signOutFunc().then(() =>{
+            setLoading(false);
+            toast.error("your email is not verified.");
+            
+          })
+          return;
+        }
+        setUser(res.user);
+        toast.success("Login successful");
+        navigate("/");
+      })
+      .catch((err) => {
+        // console.log(err);
+        setLoading(false);
+        toast.error(err.message);
+      });
   };
-//  google signin function
+  //  google signin function
   const handleGoogleSignin = () => {
     signinWithGoogleFunc()
       .then((res) => {
         setUser(res.user);
+        setLoading(false);
         toast.success("Google login successful");
         navigate("/");
       })
       .catch((err) => {
+        // console.log(err);
         toast.error(err.message);
-        console.log(err);
       });
   };
 
@@ -51,14 +68,29 @@ const Login = () => {
     signinWithGithubFunc()
       .then((res) => {
         setUser(res.user);
+        setLoading(false);
         toast.success("Github login successful");
         navigate("/");
       })
       .catch((err) => {
+        // console.log(err);
         toast.error(err.message);
-        console.log(err);
       });
   };
+
+  // reset password
+  const handlePassReset =(email) =>{
+    sendPassResetEmailFunc(email)
+    .then((res)=>{
+      console.log(res)
+      setLoading(false);
+      toast.success("check your email to reset password");
+    
+    })
+    .catch((e)=>{
+      toast.error(e.message);       
+    })
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
@@ -66,7 +98,6 @@ const Login = () => {
         <h2 className="text-3xl font-bold text-white text-center mb-6">
           Welcome Back
         </h2>
-
         <form onSubmit={handleLogin} className="space-y-4">
           {/* Email */}
           <div>
@@ -74,6 +105,7 @@ const Login = () => {
             <input
               name="email"
               type="email"
+              ref={emailRef}
               placeholder="Enter your email"
               className="w-full mt-1 px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-200 outline-none focus:ring-2 focus:ring-pink-400"
               required
@@ -98,9 +130,7 @@ const Login = () => {
               <input type="checkbox" className="accent-pink-500" />
               Remember me
             </label>
-            <a href="#" className="hover:underline">
-              Forgot?
-            </a>
+            <Link onClick={() => handlePassReset(emailRef.current.value)}>Forgot?</Link>
           </div>
 
           {/* Button */}
