@@ -8,14 +8,13 @@ const Register = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const {
-     createUser,
-     updateProfileFunc,
-     sendEmailVerificationFunc,
-     signOutFunc,
-     setUser,
-      setLoading,
-    } = useContext(AuthContext);
-
+    createUser,
+    updateProfileFunc,
+    sendEmailVerificationFunc,
+    signOutFunc,
+    setUser,
+    setLoading,
+  } = useContext(AuthContext);
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -99,7 +98,6 @@ const Register = () => {
       });
   };
 
-  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <div className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-white/20">

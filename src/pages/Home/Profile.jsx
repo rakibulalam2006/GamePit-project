@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { AuthContext } from "../../Context/AuthContext";
+import { Link } from "react-router";
+import { MdModeEdit } from "react-icons/md";
 
 const Profile = () => {
   const [games, setGames] = useState([]);
@@ -26,6 +28,9 @@ const Profile = () => {
         <h1 className="text-3xl font-bold mb-6">Profile</h1>
 
         <div className="border p-5 rounded-lg">
+          <Link className="flex justify-end" to="/update-profile">
+            <MdModeEdit size={30} />
+          </Link>
           <img
             src={user?.photoURL}
             alt="Profile"

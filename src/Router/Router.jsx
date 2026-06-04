@@ -5,9 +5,9 @@ import AllGames from "../pages/Home/AllGames";
 import GameDetails from "../pages/Home/GameDetails";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
-
 import Profile from "../pages/Home/Profile";
 import PrivateRoute from "../Private/PrivateRoute";
+import UpdateProfile from "../pages/Home/updateProfile";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +50,14 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path:"/update-profile",
+        element:(
+          <PrivateRoute>
+            <UpdateProfile></UpdateProfile>
+          </PrivateRoute>
+        ),
+      }
     ],
   },
 ]);
