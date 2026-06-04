@@ -1,12 +1,13 @@
-import { useContext, useRef,} from "react";
+import { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 import { toast } from "react-toastify";
-
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
 
 const Login = () => {
   const navigate = useNavigate();
   const emailRef = useRef(null);
+  const [show, setShow] = useState(false);
 
   const {
     signinWithEmailPasswordFunc,
@@ -17,8 +18,6 @@ const Login = () => {
     signOutFunc,
     sendPassResetEmailFunc,
   } = useContext(AuthContext);
-
-  
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -31,11 +30,10 @@ const Login = () => {
     signinWithEmailPasswordFunc(email, password)
       .then((res) => {
         if (!res.user.emailVerified) {
-          signOutFunc().then(() =>{
+          signOutFunc().then(() => {
             setLoading(false);
             toast.error("your email is not verified.");
-            
-          })
+          });
           return;
         }
         setUser(res.user);
@@ -47,6 +45,7 @@ const Login = () => {
         setLoading(false);
         toast.error(err.message);
       });
+    e.target.reset();
   };
   //  google signin function
   const handleGoogleSignin = () => {
@@ -79,18 +78,17 @@ const Login = () => {
   };
 
   // reset password
-  const handlePassReset =(email) =>{
+  const handlePassReset = (email) => {
     sendPassResetEmailFunc(email)
-    .then((res)=>{
-      console.log(res)
-      setLoading(false);
-      toast.success("check your email to reset password");
-    
-    })
-    .catch((e)=>{
-      toast.error(e.message);       
-    })
-  }
+      .then((res) => {
+        console.log(res);
+        setLoading(false);
+        toast.success("check your email to reset password");
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
@@ -113,15 +111,22 @@ const Login = () => {
           </div>
 
           {/* Password */}
-          <div>
+          <div className="relative">
             <label className="text-white text-sm">Password</label>
             <input
               name="password"
-              type="password"
+              type={show ? "text" : "password"}
               placeholder="Enter your password"
               className="w-full mt-1 px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-200 outline-none focus:ring-2 focus:ring-purple-400"
               required
             />
+
+            <span
+              onClick={() => setShow(!show)}
+              className="absolute right-3 top-10 cursor-pointer z-50"
+            >
+              {show ? <VscEyeClosed /> : <VscEye />}
+            </span>
           </div>
 
           {/* Remember + Forgot */}
@@ -130,7 +135,9 @@ const Login = () => {
               <input type="checkbox" className="accent-pink-500" />
               Remember me
             </label>
-            <Link onClick={() => handlePassReset(emailRef.current.value)}>Forgot?</Link>
+            <Link onClick={() => handlePassReset(emailRef.current.value)}>
+              Forgot?
+            </Link>
           </div>
 
           {/* Button */}

@@ -7,6 +7,7 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 
 import Profile from "../pages/Home/Profile";
+import PrivateRoute from "../Private/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -19,32 +20,38 @@ const router = createBrowserRouter([
         loader: () => fetch("/data.json"),
       },
       {
-        path:"/allGames",
-        element:<AllGames></AllGames>,
-        loader:() =>  fetch("/data.json")
-        
+        path: "/allGames",
+        element: <AllGames></AllGames>,
+        loader: () => fetch("/data.json"),
       },
       {
-        path:"/game/:id",
-        element:<GameDetails></GameDetails>,
-        loader:() => fetch("data.json")
+        path: "/game/:id",
+        element: (
+          <PrivateRoute>
+            <GameDetails></GameDetails>
+          </PrivateRoute>
+        ),
+        loader: () => fetch("data.json"),
       },
       {
-        path:"/login",
-        element:<Login></Login>
+        path: "/login",
+        element: <Login></Login>,
       },
-      
+
       {
-        path:"/register",
-        element:<Register></Register>
+        path: "/register",
+        element: <Register></Register>,
       },
       {
-        path:"/profile",
-        element:<Profile></Profile>
-      }
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
-  
 ]);
 
 export default router;

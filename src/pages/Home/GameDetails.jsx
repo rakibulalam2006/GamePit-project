@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 const GameDetails = () => {
     const data = useLoaderData();
     const {id} = useParams();
+    
+  
     // console.log(data)
     const game = data.find((item)=>item.id === Number(id));
     if (!game) {
@@ -73,7 +75,10 @@ const GameDetails = () => {
             <span>Size: {game.appSize}</span>
           </div>
 
-          <button onClick={handleInstall}  className="bg-green-600 px-5 py-2 rounded">
+          <button 
+          
+          onClick={handleInstall} 
+          className="bg-green-600 px-5 py-2 rounded">
             Download Now
           </button>
         </div>
