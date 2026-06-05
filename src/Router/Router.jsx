@@ -8,11 +8,14 @@ import Register from "../pages/Auth/Register";
 import Profile from "../pages/Home/Profile";
 import PrivateRoute from "../Private/PrivateRoute";
 import UpdateProfile from "../pages/Home/updateProfile";
+import ErrorPage from "../components/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
+
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -51,13 +54,13 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path:"/update-profile",
-        element:(
+        path: "/update-profile",
+        element: (
           <PrivateRoute>
             <UpdateProfile></UpdateProfile>
           </PrivateRoute>
         ),
-      }
+      },
     ],
   },
 ]);
