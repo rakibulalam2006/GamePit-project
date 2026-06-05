@@ -9,6 +9,7 @@ const Profile = () => {
   const {user} = useContext(AuthContext);
 
   useEffect(() => {
+    document.title = "Profile - GamePit";
     const installedGames =
       JSON.parse(localStorage.getItem("installedGames")) || [];
 

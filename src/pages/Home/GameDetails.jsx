@@ -1,7 +1,14 @@
+import { useEffect } from "react";
 import { useLoaderData, useParams } from "react-router";
 import { toast } from "react-toastify";
 
 const GameDetails = () => {
+
+  // dynamic Title
+  useEffect(() => {
+    document.title = "Game Details - GamePit";
+  }, []);
+
     const data = useLoaderData();
     const {id} = useParams();
     

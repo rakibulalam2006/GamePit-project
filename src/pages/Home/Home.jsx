@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router";
 import Banner from "./Banner";
 import Card from "./Card";
+import { useEffect } from "react";
 
 const Home = () => {
 
@@ -8,6 +9,9 @@ const Home = () => {
 
   const topRated = [...data].sort((a, b) => b.ratings - a.ratings).slice(0, 4);
 
+  useEffect(() => {
+    document.title = "Home - GamePit";
+  }, []);
     return (
       <div>
         <Banner></Banner>
