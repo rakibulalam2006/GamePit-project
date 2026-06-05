@@ -24,10 +24,10 @@ const Register = () => {
     const displayName = form.name.value;
     const photoURL = form.photoUrl.value;
     const confirmPassword = form.confirmPassword.value;
-    console.log("signup function entered", {
-      email,
-      password,
-    });
+    // console.log("signup function entered", {
+    //   email,
+    //   password,
+    // });
 
     // password validation
     const passwordPattern =
